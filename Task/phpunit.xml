@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php">
+    <php>
+        <server name='REQUEST_METHOD' value='http://localhost' />
+    </php>
+    <testsuites>
+        <testsuite name="REST API Test Suite">
+            <directory suffix=".php">./unittestfiles/tests/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
