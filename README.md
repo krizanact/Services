@@ -10,10 +10,10 @@
     
 so composer will renew all required and missing data in this project. For connecting to database configure your data inside these two scripts: "ServiceB.php" and "State.php" script. Example:
 
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $db = "task";
+        $servername = "dbserver";
+        $username = "dbuser";
+        $password = "dbpass";
+        $db = "dbname";
 	
   File "task.sql" should be imported in MySQL and then we are ready to start.	
 
@@ -31,7 +31,7 @@ so composer will renew all required and missing data in this project. For connec
         $exchange = 'router';
         $queue = 'msgs';
         
-  After successfully making relationship beetween sender and receiver(Service A and Service B) next thing was to make sucessfully POST request to Service A and I've sent requests with <a href="https://www.getpostman.com/">Postman</a>(API tester). So the goal was to send json message with  parameters "Amount" and "Curreny" to Service A and Service A had to accept that message. After payload came to Service A there are specific conditions to be filled defined in IF statement and if all condtions are met message will be sent to Service B and  response 200 will be generated or if one of conditions isn't met message won't be sent to Service B and response 400(Invalid request) will be generated. We can run our receiver in console typing:
+  After successfully making relationship beetween sender and receiver(Service A and Service B) next thing was to make successfully POST request to Service A and I've sent request/s with <a href="https://www.getpostman.com/">Postman</a>(API tester). So the goal was to send json message with  parameters "Amount" and "Curreny" to Service A and Service A must accept that message. After payload came to Service A there are specific conditions to be filled defined in IF statement and if all conditions are met message will be sent to Service B and  response 200 will be generated else if one of conditions isn't met message won't be sent to Service B and response 400(Invalid request) will be generated. We can run our receiver in console typing:
         
        php serviceB.php
        
@@ -50,7 +50,7 @@ and content-type should be application/json and sent in format like this(example
 	      "currency":"EUR"
        } 
 
-  So as I already mentioned things above Service B will consume every message that is being successfully sent from Service A and as a result of receiving function will make database changes even if Service B is offline, all messages that have been sent in meanwhile will come as soon as Service B becomes online and will then process as usual.
+  So as I already mentioned things above Service B will consume every message that is being successfully sent from Service A and as a result of receiving function will make database changes even if Service B is offline, all messages that have been sent in meanwhile will come as soon as Service B becomes online and  then messages will process as usual.
   
   Script "State.php" is seperated code, if we want to check our current state(balance,updated_at) we should send GET request on url:
   
